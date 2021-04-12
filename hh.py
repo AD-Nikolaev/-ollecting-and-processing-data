@@ -111,6 +111,8 @@ while True:
         items_info.append(info)
         i += 1
     print(f"page №{params['page']} done...")
+    if next_button is None:
+        break
     params["page"] += 1
 
     r = get(url, headers, params)
@@ -118,10 +120,9 @@ while True:
     save_pickle(r, path)
     r = load_pickle(path)
     soup = bs(r.text, "html.parser")
-    if next_button is None:
-        break
     next_button = soup.find("a", attrs={"data-qa": "pager-next"})
     time.sleep(0.4)
+
 os.remove(path)
 save_json(f"hh_{u_input_search}_search_result.json", items_info)
 data = load_json(f"hh_{u_input_search}_search_result.json")
