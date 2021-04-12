@@ -73,7 +73,7 @@ soup = bs(r.text, "html.parser")
 next_button = True
 items_info = []
 i = 0
-while next_button is not None:
+while True:
     items = soup.find_all(attrs={"class": "f-test-search-result-item"})
     for item in items:
         respond_button = item.find("button", attrs={
@@ -131,7 +131,8 @@ while next_button is not None:
     save_pickle(r, path)
     r = load_pickle(path)
     soup = bs(r.text, "html.parser")
-
+    if next_button is None:
+        break
     next_button = soup.find("a", attrs={"rel": "next"})
     time.sleep(0.4)
 save_json(f"sj_{u_input_search}_search_result.json", items_info)

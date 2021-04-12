@@ -75,7 +75,7 @@ items_info = []
 i = 0
 with open(f"hh_{u_input_search}_search_errors.txt", "w") as f:
     print('')
-while next_button is not None:
+while True:
     items = soup.find_all(attrs={"class": "vacancy-serp-item"})
     for item in items:
         info = {}
@@ -118,7 +118,8 @@ while next_button is not None:
     save_pickle(r, path)
     r = load_pickle(path)
     soup = bs(r.text, "html.parser")
-
+    if next_button is None:
+        break
     next_button = soup.find("a", attrs={"data-qa": "pager-next"})
     time.sleep(0.4)
 os.remove(path)
