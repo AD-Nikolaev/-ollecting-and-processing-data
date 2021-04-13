@@ -53,9 +53,9 @@ else:
     price_exists = 0
 params = {
     "keywords": u_input_search,
-    # "geo%%5Bt%%5D%%5B0%%5D": 4,  # Для поиска только по Москве
+    # "geo[t][0]": 4,  # Для поиска только по Москве
     "payment_defined": price_exists,
-    "work_type%5B0%5D": u_input_employment,
+    "work_type[0]": u_input_employment,
     "page": 1
 }
 headers = {
